@@ -1,0 +1,2 @@
+** To covert html to pdf code use this command:
+apt-get install wkhtmltopdf
