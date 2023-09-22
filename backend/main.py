@@ -1,6 +1,5 @@
 import os
 from jinja2 import Environment, FileSystemLoader
-import pdfkit
 from pyhtml2pdf import converter
 
 data = {
@@ -8,19 +7,21 @@ data = {
     "age": 18
 }
 
-file_loader = FileSystemLoader('public')
-env = Environment(loader=file_loader)
+def makePdf(data):
+    file_loader = FileSystemLoader('public')
+    env = Environment(loader=file_loader)
 
-template = env.get_template('pdf.html')
+    template = env.get_template('./pdf.html')
 
-output = template.render(data=data)
+    output = template.render(data=data)
 
-with open('./public/res.html', 'w') as f:
-    f.write(output)
-    f.close()
+    with open('./public/res.html', 'w') as f:
+        f.write(output)
+        f.close()
 
+    path = os.path.abspath('./public/res.html')
+    print(path)
+    converter.convert(f'file:///{path}', 'sample.pdf')
 
-# pdfkit.from_file('./public/res.html', 'output.pdf', css='./public/style/pdf.css')
-path = os.path.abspath('./public/res.html')
-print(path)
-converter.convert(f'file:///{path}', 'sample.pdf')
+if __name__ == '__main__':
+    makePdf(data)
