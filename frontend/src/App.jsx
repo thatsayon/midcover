@@ -7,8 +7,19 @@ function App() {
     const uina = {
       "name": name
     };
-    axios.post("http://127.0.0.1:8000", uina).then((response) => {
-      console.log(response.status)
+    axios.post("http://127.0.0.1:8000", uina, {responseType: 'blob'}).then((response) => {
+      const pdfBlob = new Blob([response.data], {type: 'application/pdf'});
+
+      const url = window.URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'sample.pdf';
+      document.body.appendChild(a);
+      a.click();
+      
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     })
     console.log(name)
   }

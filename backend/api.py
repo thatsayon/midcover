@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-
+from starlette.responses import FileResponse
 app = FastAPI()
 
 class PdfInfo(BaseModel):
@@ -31,4 +31,19 @@ def getData(item: PdfInfo):
     json_compatible_item_data = jsonable_encoder(item)
     print(json_compatible_item_data)
     makePdf(data=json_compatible_item_data)
-    return JSONResponse(content=json_compatible_item_data)
+    # return JSONResponse(content=json_compatible_item_data)
+    headers = {
+        "Content-Disposition": "inline; filename=sample.pdf"
+    }  
+    
+    response = FileResponse("sample.pdf", media_type="application/pdf", headers=headers)
+    return response 
+
+@app.get("/pdf")
+def get_pdf():
+    headers = {
+        "Content-Disposition": "inline; filename=sample.pdf"
+    }  
+    
+    response = FileResponse("sample.pdf", media_type="application/pdf", headers=headers)
+    return response
