@@ -1,8 +1,34 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from main import makePdf
+from fastapi.params import Body
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+
 app = FastAPI()
+
+class PdfInfo(BaseModel):
+    name: str 
+    
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
     makePdf(data={"name":"Sara Ali Khan"})
     return {"message": "everything is working perfectly"}
+
+@app.post("/")
+def getData(item: PdfInfo):
+    json_compatible_item_data = jsonable_encoder(item)
+    print(json_compatible_item_data)
+    makePdf(data=json_compatible_item_data)
+    return JSONResponse(content=json_compatible_item_data)
