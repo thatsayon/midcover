@@ -20,7 +20,6 @@ def makePdf(data):
         f.close()
 
     path = os.path.abspath('./public/res.html')
-    print(path)
     converter.convert(f'file:///{path}', 'sample.pdf')
 
 if __name__ == '__main__':

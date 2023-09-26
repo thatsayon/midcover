@@ -5,3 +5,14 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.nameroll {
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+}
+
+.nameroll input {
+    width: 100%;
+    margin-right: 10px;
+}

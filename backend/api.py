@@ -9,7 +9,14 @@ from starlette.responses import FileResponse
 app = FastAPI()
 
 class PdfInfo(BaseModel):
+    sub: str
+    jobN: str
+    jobName: str 
     name: str 
+    roll: str 
+    sem: str 
+    shift: str 
+    depart: str
     
 origins = ["*"]
 
@@ -28,8 +35,8 @@ def root():
 
 @app.post("/")
 def getData(item: PdfInfo):
+    print(item)
     json_compatible_item_data = jsonable_encoder(item)
-    print(json_compatible_item_data)
     makePdf(data=json_compatible_item_data)
     # return JSONResponse(content=json_compatible_item_data)
     headers = {
