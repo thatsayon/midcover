@@ -17,6 +17,7 @@ class PdfInfo(BaseModel):
     sem: str 
     shift: str 
     depart: str
+    teacher: str
     
 origins = ["*"]
 

@@ -1,18 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .maindiv {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  width: 75vw;
+  margin: auto;
+  align-items: center;
+  flex-direction: column;
 }
 
-.nameroll {
-    display: flex;
-    justify-content: space-between;
-    width: 30vw;
+.userdiv {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
 
-.nameroll input {
-    width: 100%;
-    margin-right: 10px;
+.fcdiv {
+  width: 70%;
+}
+
+.jobnn,
+.nameroll,
+.semshif,
+.finaldiv {
+  display: flex;
+}
+
+.jobnn div,
+.nameroll div,
+.semshif div,
+.finaldiv div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.jobnn div input,
+.nameroll div input,
+.semshif div input,
+.finaldiv div input {
+  flex: 1;
+}
+
+.maindiv label {
+  font-size: 32px;
+  padding-bottom: .4rem;
+}
+
+.maindiv input {
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+  padding: .5rem .4rem;
+  font-size: 28px;
+}
+
+.gpdf {
+  font-size: 32px;
+  cursor: pointer;
+  padding: .5rem .7rem;
+  border: none;
+  border-radius: 20px;
+  margin-top: 1rem;
 }
